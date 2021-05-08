@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+       long firstl,secondl,thirdl;
+        firstl=secondl=thirdl=LONG_MIN;
+        for(int n:nums){
+            if(firstl==n || secondl==n || thirdl==n)
+                continue;
+            if(firstl<n)
+            {
+            thirdl=secondl;
+            secondl=firstl;
+            firstl=n;
+            }
+           else if(secondl<n)
+           {
+               thirdl=secondl;
+               secondl=n;
+           }
+            else if(thirdl<n){
+                thirdl=n;
+            }
+        }
+        if (thirdl==LONG_MIN)
+            return firstl;
+        else
+            return thirdl;
+    }
+    
+};
