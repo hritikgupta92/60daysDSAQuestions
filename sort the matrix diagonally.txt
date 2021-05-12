@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<vector<int>>& mat;
+    int n,m;
+    
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+     this->mat=mat;
+        n=mat.size();
+        m=mat[0].size();
+        
+        for(int i=0;i<n;i++){
+            sortDiagonal(i,0);
+        }
+        for(int j=0;j<m;j++){
+            sortDiagonal(0,j);
+        }
+        return mat;
+    }
+    
+    
+    void sortDiagonal(int i,int j){
+        vector<int> diagonal;
+        while(i<n && j<m){
+            diagonal.push_back(mat[i][j]);
+            ++i;
+            ++j;
+        }
+        sort(diagonal.begin(),diagonal.end());
+        while(i>0 && j>0)
+        {
+            --i;
+            --j;
+            mat[i][j]=diagonal[diagonal.size()-1];
+            diagonal.erase(diagonal.size()-1);
+        }
+    }
+};
