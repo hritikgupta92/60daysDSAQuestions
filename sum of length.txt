@@ -1,0 +1,19 @@
+class Solution{
+    public:
+    int sumoflength(int arr[], int n)
+    {   unordered_set<int>s;
+        int j=0,sum=0;
+        for(int i=0;i<n;i++){
+            /*following thing has been done for getting distinct
+            elemetns in set */
+            while(j<n && s.find(arr[j])==s.end()){
+            s.insert(arr[j]);
+            j++;
+        }
+        sum+=(j-i)*(j-i+1)/2; 
+        s.erase(arr[i]); //1 /2 3
+        }
+        
+        return sum;
+    }
+};
