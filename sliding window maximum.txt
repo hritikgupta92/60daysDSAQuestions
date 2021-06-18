@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& a, int k) {
+        deque<int>q(k);
+        vector<int>ans;
+        //for handling first window of element k
+        for(int i=0;i<k;i++){
+        while(!q.empty() && a[q.back()]<a[i]){
+            q.pop_back();
+        }
+        q.push_back(i);
+        }
+        ans.push_back(a[q.front()]);
+        for(int i=k;i<a.size();i++){
+            //remove elements that are not part of window
+            while(q.front()==i-k)
+                q.pop_front();
+            //removing the non useful elements from the window
+            
+            while(!q.empty() && a[q.back()]<a[i]){
+                q.pop_back();
+            }
+            q.push_back(i);
+            ans.push_back(a[q.front()]);
+        }
+        return ans;
+    }
+};

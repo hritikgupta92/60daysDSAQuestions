@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int gcd(int a,int b){
+        if(a==0)
+            return b;
+        return gcd(b%a,a);
+    }
+    int nthMagicalNumber(int n, int a, int b) {
+     /*   int mod=1e9+7;
+        int LCM=a/gcd(a,b)*b;
+        long l=0;
+        long h=(long) n*min(a,b);
+        while(l<h){
+            long mid=l+(h-l)/2;
+            if(mid/a+mid/b-mid/LCM<n)
+                l=mid+1;
+            else
+                h=mid;
+        }
+        return (int)(l%mod);*/
+        
+        int mod=1e9+7;
+        int lc=a/gcd(a,b)*b;
+        long l=0;
+        long h=(long) n*min(a,b);
+        while(l<h){
+            long mid=(l+h)/2;
+            if(mid/a+mid/b-mid/lc<n)
+                l=mid+1;
+            else
+                h=mid;
+        }
+        return (int)(l%mod);
+    }
+};
+
