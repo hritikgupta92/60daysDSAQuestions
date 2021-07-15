@@ -1,0 +1,42 @@
+class Solution {
+public:
+     int help(vector<int>& prices) {
+        int profit=0;
+        for(int i=1;i<prices.size();i++){
+            if(prices[i]>prices[i-1])
+                profit+=(prices[i]-prices[i-1]);
+        }
+        return profit;
+    }
+    int maxProfit(int k, vector<int>& prices) {
+         int n=prices.size();
+        int min_price1=INT_MAX;
+        int profit1=0;
+        int profit2=0;
+        int min_price2=INT_MAX;
+        if(k<=0)
+            return 0;
+        if(k>=n/2){
+            return help(prices);
+        }            
+        int minp[k];
+        int maxp[k];
+        for(int i=0;i<k;i++){
+            minp[i]=INT_MAX;
+            maxp[i]=0;
+        }
+        for(int i=0;i<n;i++){
+        /* min_price1=min(prices[i],min_price1);
+         profit1=max(profit1,prices[i]-min_price1);
+         min_price2=min(min_price2,prices[i]-profit1);
+         profit2=max(profit2,prices[i]-min_price2);*/
+            for(int j=0;j<k;j++)
+            {
+            minp[j]=min(minp[j],prices[i]-(j>0?maxp[j-1]:0));
+            maxp[j]=max(maxp[j],prices[i]-minp[j]);
+                }
+   
+        }
+        return maxp[k-1];
+    }
+};

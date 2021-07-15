@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int help(int i,int m,vector<int>& piles,vector<vector<int>>&dp){
+        if(i>=piles.size())
+            return 0;
+       int score=0;
+        int diff=INT_MIN;
+        if(dp[i][m]!=-1)
+            return dp[i][m];
+        /*if(dp[i][m]!=-1)
+            return dp[i][m];*/
+        for(int x=1;x<=2*m && i+x-1<piles.size();x++){
+            score+=piles[i+x-1];
+            diff=max(diff,score-help(i+x,max(m,x),piles,dp));
+        }
+        return dp[i][m]=diff;
+    }
+    int stoneGameII(vector<int>& piles) {
+       vector<vector<int>>dp(101,vector<int>(110));
+        for(int i=0;i<101;i++){
+            for(int j=0;j<110;j++){
+                dp[i][j]=-1;
+            }
+        }
+        int sum=0;
+        for(auto a:piles)
+            sum+=a;
+        int n=piles.size();
+        int diff=help(0,1,piles,dp);
+        return (sum+diff)/2;
+    }
+};

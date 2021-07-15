@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minSetSize(vector<int>& arr) {
+        sort(arr.begin(),arr.end());
+        vector<int>counts;
+        int c=1;
+        for(int i=1;i<arr.size();i++){
+            if(arr[i]==arr[i-1]){
+                c++;
+            }
+            else{
+                counts.push_back(c);
+                c=1;
+            }
+        }
+        counts.push_back(c);
+        sort(counts.begin(),counts.end(),greater<int>());
+        int n=arr.size()/2;
+        int ans=0;
+        for(int i=0;n>0 && i<counts.size();i++){
+            ans++;
+            n-=counts[i];
+        }
+        return ans;
+    }
+};

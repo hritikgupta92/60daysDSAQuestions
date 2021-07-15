@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void help(vector<int>&result,int n){
+        if(n==0)
+        {
+            result.push_back(0);
+            return ;
+        }
+        help(result,n-1);
+        int curr_len=result.size();
+        int mask=1<<(n-1);
+        for(int i=curr_len-1;i>=0;i--){
+            result.push_back(result[i]|mask);
+        }
+        return;
+    }
+    vector<int> grayCode(int n) {
+        vector<int>result;
+        help(result,n);
+        return result;
+    }
+};
